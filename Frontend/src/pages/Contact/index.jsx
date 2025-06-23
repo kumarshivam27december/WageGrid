@@ -64,9 +64,9 @@ const Contact = () => {
 
     return (
         <>
-            <div className="dark:bg-boxdark">
+            <div className="min-h-screen flex flex-col dark:bg-boxdark">
                 <Navbar />
-                <div className="parent py-16 my-16 dark:bg-boxdark">
+                <div className="parent py-16 my-16 dark:bg-boxdark flex-1">
                     <motion.div
                         initial="hidden"
                         animate={viewDiv && "visible"}

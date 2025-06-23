@@ -27,8 +27,10 @@ function Login() {
         </div>
 
         <div className="w-full border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
-          <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
-            <LoginInput />
+          <div className="w-full flex justify-center items-center min-h-[60vh]">
+            <div className="w-full max-w-md bg-white/90 dark:bg-boxdark-2/90 rounded-2xl shadow-xl border-2 border-accent p-8 sm:p-12.5 xl:p-17.5 backdrop-blur-md">
+              <LoginInput />
+            </div>
           </div>
         </div>
       </div>
