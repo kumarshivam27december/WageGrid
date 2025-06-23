@@ -54,7 +54,7 @@ export default function Navbar() {
 
     return (
         <div
-            className='visible  bg-white dark:bg-black z-50'>
+            className='visible bg-primary/90 backdrop-blur-md shadow-md dark:bg-boxdark-2 z-50'>
             <div className="w-full flex items-center justify-between px-3 md:px-24 py-3">
                 <div>
                     <Link to="/">
@@ -73,7 +73,7 @@ export default function Navbar() {
                                 <NavLink
                                     to={navItem.link}
                                     style={activeLink}
-                                    className="dark:text-white hover:text-accent duration-300 dark:hover:text-primary text-boxdark"
+                                    className="text-accent hover:text-secondary duration-300 dark:text-accent dark:hover:text-secondary"
                                 >
                                     {navItem.title}
                                 </NavLink>
@@ -90,19 +90,19 @@ export default function Navbar() {
                         </Link>
                     </ul>
                     <div className="block lg:hidden ">
-                        <button onClick={toggleDrawer} className="btn btn-ghost text-black dark:text-white dark:hover:text-primary hover:text-primary ">
+                        <button onClick={toggleDrawer} className="btn btn-ghost text-accent dark:text-accent dark:hover:text-secondary hover:text-secondary ">
                             <RiMenu3Fill></RiMenu3Fill>
                         </button>
                         <Drawer
                             open={isOpen}
                             onClose={toggleDrawer}
                             direction="right"
-                            className="bla bla bla flex flex-col justify-between pb-4 dark:bg-boxdark"
+                            className="flex flex-col justify-between pb-4 bg-primary/90 dark:bg-boxdark-2"
                         >
-                            <ul className="dark:bg-boxdark">
+                            <ul className="dark:bg-boxdark-2">
                                 <li className="mt-6 mb-10 ml-4 ">
                                     <GiCrossMark
-                                        className="cursor-pointer hover:text-primary text-boxdark duration-300 dark:text-white dark:hover:text-primary"
+                                        className="cursor-pointer hover:text-secondary text-accent duration-300 dark:text-accent dark:hover:text-secondary"
                                         onClick={() => setIsOpen(!isOpen)}
                                     ></GiCrossMark>
                                 </li>
@@ -115,7 +115,7 @@ export default function Navbar() {
                                         <NavLink
                                             to={navItem.link}
                                             style={activeLink}
-                                            className="flex items-center text-boxdark hover:text-primary duration-300 dark:text-white dark:hover:text-primary"
+                                            className="flex items-center text-accent hover:text-secondary duration-300 dark:text-accent dark:hover:text-secondary"
                                         >
                                             <span className="mr-3">{navItem.icon}</span>
                                             <span>{navItem.title}</span>
@@ -130,13 +130,13 @@ export default function Navbar() {
                                     to={'/login'}
                                 >
                                     <ButtonThree
-                                        className="primary-button w-full text-white">
+                                        className="primary-button w-full text-white bg-accent hover:bg-secondary">
                                         <span>Login</span>
                                     </ButtonThree>
                                 </Link>
                             </ul>
-                            <div className="text-center dark:bg-boxdark">
-                                <p className="text-accent dark:text-white">
+                            <div className="text-center dark:bg-boxdark-2">
+                                <p className="text-accent dark:text-accent">
                                     &copy; Copyright 2023, PT. Humpus Karbometil Selulosa. All Rights Reserved
                                 </p>
                             </div>

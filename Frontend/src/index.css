@@ -4,7 +4,14 @@
 
 @layer base {
   body {
-    @apply font-satoshi font-normal text-base text-body bg-whiten relative z-1;
+    @apply font-satoshi font-normal text-base text-body min-h-screen relative z-1;
+    background-image:
+      linear-gradient(135deg, #a7f3d0 0%, #fde68a 50%, #f3e8ff 100%),
+      url('data:image/svg+xml;utf8,<svg width="100%25" height="100%25" xmlns="http://www.w3.org/2000/svg"><polygon points="0,100 50,0 100,100" fill="%2310b981" fill-opacity="0.08"/><polygon points="0,0 50,100 100,0" fill="%23a78bfa" fill-opacity="0.04"/></svg>'),
+      url('https://www.transparenttextures.com/patterns/leaf.png');
+    background-blend-mode: lighten, normal, multiply;
+    background-size: cover, 200px 200px, auto;
+    background-repeat: no-repeat, repeat, repeat;
   }
 }
 
