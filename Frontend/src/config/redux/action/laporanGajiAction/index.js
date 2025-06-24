@@ -28,7 +28,7 @@ export const fetchLaporanGajiByYear = (selectedYear, onDataFound) => async (disp
         onDataFound();
     } catch (error) {
         if (error.response && error.response.data) {
-            dispatch(fetchLaporanGajiFailure("Terjadi kesalahan saat memuat data."));
+            dispatch(fetchLaporanGajiFailure("An error occurred while loading data."));
         }
     }
 };
@@ -43,7 +43,7 @@ export const fetchLaporanGajiByMonth = (selectedMonth, onDataFound) => async (di
         onDataFound();
     } catch (error) {
         if (error.response && error.response.data) {
-            dispatch(fetchLaporanGajiFailure("Terjadi kesalahan saat memuat data."));
+            dispatch(fetchLaporanGajiFailure("An error occurred while loading data."));
         }
     }
 };

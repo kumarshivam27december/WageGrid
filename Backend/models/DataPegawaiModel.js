@@ -45,7 +45,7 @@ const DataPegawaiSchema = new mongoose.Schema({
     },
     photo: {
         type: String,
-        required: true,
+        required: false,
         maxlength: 100
     },
     url: {

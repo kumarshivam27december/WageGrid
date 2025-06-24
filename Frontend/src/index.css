@@ -156,3 +156,11 @@ span.flatpickr-weekday,
 [x-cloak] {
   display: none !important;
 }
+
+/* Navbar logo size fix */
+.navbar-logo {
+  max-height: 48px;
+  height: auto;
+  width: auto;
+  display: block;
+}

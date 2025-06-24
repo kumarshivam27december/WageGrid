@@ -72,9 +72,9 @@ const Contact = () => {
                         animate={viewDiv && "visible"}
                         variants={headingAnimation}
                     >
-                        <h3 className="text-neutral text-center dark:text-white">Kontak</h3>
+                        <h3 className="text-neutral text-center dark:text-white">Contact</h3>
                         <h1 className="text-4xl font-semibold drop-shadow-md text-center text-accent dark:text-white">
-                            Hubungi <span className="text-primary">Kami</span>
+                            Contact <span className="text-primary">Us</span>
                         </h1>
                         <BottomLine />
                     </motion.div>
@@ -93,7 +93,7 @@ const Contact = () => {
                                         type="text"
                                         name="name"
                                         id="name"
-                                        placeholder="Nama"
+                                        placeholder="Name"
                                         required
                                     />
                                     <input
@@ -110,7 +110,7 @@ const Contact = () => {
                                     type="text"
                                     name="subject"
                                     id="subject"
-                                    placeholder="Subjek"
+                                    placeholder="Subject"
                                     required
                                 />
                                 <textarea
@@ -119,7 +119,7 @@ const Contact = () => {
                                     id="message"
                                     cols="30"
                                     rows="5"
-                                    placeholder="Pesan"
+                                    placeholder="Message"
                                     required
                                 ></textarea>
                                 <ButtonThree
@@ -127,7 +127,7 @@ const Contact = () => {
                                     value="Send Message"
                                     className=""
                                 >
-                                    <span>Kirim</span>
+                                    <span>Send</span>
                                     <span><MdSend /></span>
                                 </ButtonThree>
                             </form>
@@ -140,34 +140,34 @@ const Contact = () => {
                         >
                             <div className="flex items-center my-6">
                                 <FaUserAlt className="text-2xl mr-8 text-primary duration-300"></FaUserAlt>
-                                <h3 className="font-medium dark:text-white">PT. Humpus Karbometil Selulosa</h3>
+                                <h3 className="font-medium dark:text-white">Shivam Kumar</h3>
                             </div>
                             <div className="flex items-center my-6">
                                 <FaPhoneAlt className="text-2xl mr-8 text-primary duration-300"></FaPhoneAlt>
-                                <h3 className="font-medium dark:text-white">021-044</h3>
+                                <h3 className="font-medium dark:text-white">9955 0000 0000</h3>
                             </div>
                             <div className="flex items-center my-6">
                                 <MdEmail className="text-3xl mr-8 text-primary duration-300"></MdEmail>
-                                <h3 className="font-medium dark:text-white">info@hks.com</h3>
+                                <h3 className="font-medium dark:text-white">kumarshivamcodingcoding@gmail.com</h3>
                             </div>
                             <div className="flex items-center my-6">
                                 <FaLocationArrow className="text-2xl mr-8 text-primary duration-300"></FaLocationArrow>
 
                                 <h3 className="font-medium dark:text-white">
-                                    Karawang, Jawa Barat, Indonesia
+                                    Phagwara, Punjab, India
                                 </h3>
                             </div>
                             <div className="mt-8 flex items-center">
                                 <h3 className="text-xl dark:text-white">Social</h3>
                                 <div className="bg-black dark:bg-white w-10 h-[2px] mx-4"></div>
                                 <a
-                                    href="/"
+                                    href="https://www.linkedin.com/in/2004shivamkumar/"
                                     target="blank"
                                     className="text-3xl text-primary hover:text-accent hover:-translate-y-1.5 shadow-lg mx-1 duration-300"
                                 >
                                     <FaLinkedin></FaLinkedin>
                                 </a>
-                                <a
+                                {/* <a
                                     href="/"
                                     target="blank"
                                     className="text-3xl text-primary hover:text-accent hover:-translate-y-1.5 shadow-lg mx-1 duration-300"
@@ -180,7 +180,7 @@ const Contact = () => {
                                     className="text-3xl text-primary hover:text-accent hover:-translate-y-1.5 shadow-lg mx-1 duration-300"
                                 >
                                     <FaInstagramSquare></FaInstagramSquare>
-                                </a>
+                                </a> */}
                             </div>
                         </motion.div>
                     </div>

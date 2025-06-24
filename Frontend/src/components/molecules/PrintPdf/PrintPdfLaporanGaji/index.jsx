@@ -35,7 +35,7 @@ const PrintPdfLaporanGaji = () => {
 
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
-    documentTitle: "Data_Gaji_Pegawai_PT. Humpuss Karbometil Selulosa",
+    documentTitle: "Employee_Salary_Data_PT. Humpuss Karbometil Selulosa",
   });
 
   useEffect(() => {
@@ -61,8 +61,8 @@ const PrintPdfLaporanGaji = () => {
   useEffect(() => {
     const today = new Date();
     const monthNames = [
-      "Januari", "Februari", "Maret", "April", "Mei", "Juni",
-      "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
     ];
     const month = monthNames[today.getMonth()];
     const year = today.getFullYear();
@@ -75,44 +75,35 @@ const PrintPdfLaporanGaji = () => {
       <div className="flex flex-col md:flex-row w-full gap-3 text-center p-6 bg-white dark:bg-meta-4">
         <div>
           <ButtonOne onClick={handlePrint}>
-            <span>Cetak</span>
+            <span>Print</span>
           </ButtonOne>
         </div>
         <div>
-          <ButtonTwo
-            onClick={() => navigate(-1)}
-          >
-            <span>Kembali</span>
+          <ButtonTwo onClick={() => navigate(-1)}>
+            <span>Back</span>
           </ButtonTwo>
         </div>
-      </div >
+      </div>
       <div ref={componentRef} className="w-200% h-100% p-10 bg-white dark:bg-meta-4">
         <div className="flex items-center gap-24 object-cover border-b-4 border-black dark:border-white">
-          <img className="w-35"
-            src={LogoSipeka}
-            title="Logo SiPeKa"
-            alt="Logo SiPeKa" />
+          <img className="w-35" src={LogoSipeka} title="SiPeKa Logo" alt="SiPeKa Logo" />
           <h1 className="text-black text-2xl font-bold boder  dark:text-white">
             PT. Humpuss Karbometil Selulosa
           </h1>
-          <img className="w-35"
-            src={LogoPt}
-            title="Logo PT.Humpuss Karbometil Selulosa"
-            alt="Logo PT.Humpuss Karbometil Selulosa"
-          />
+          <img className="w-35" src={LogoPt} title="Company Logo" alt="Company Logo" />
         </div>
         <h1 className="text-center text-black my-4 text-xl font-medium boder py-2 dark:text-white">
-          Daftar Gaji Pegawai
+          Employee Salary Report
         </h1>
         <div className="w-full md:text-lg">
           <h2 className="font-medium mb-4 block text-black dark:text-white">
-            <span className="inline-block w-32 md:w-40">Bulan</span>
+            <span className="inline-block w-32 md:w-40">Month</span>
             <span className="pl-[-8] md:pl-0"></span>
             <span className="inline-block w-7">:</span>
             {month}
           </h2>
           <h2 className="font-medium mb-4 block text-black dark:text-white">
-            <span className="inline-block w-32 md:w-40">Tahun</span>
+            <span className="inline-block w-32 md:w-40">Year</span>
             <span className="inline-block w-7">:</span>
             {year}
             <span className="pl-[-8] md:pl-0"></span>
@@ -129,25 +120,25 @@ const PrintPdfLaporanGaji = () => {
                   NIK
                 </th>
                 <th className="font-medium text-black border-t border-l border-b border-black dark:border-white dark:text-white">
-                  Nama <br /> Pegawai
+                  Employee Name
                 </th>
                 <th className="font-medium text-black border-t border-l border-b border-black dark:border-white dark:text-white">
-                  Jabatan
+                  Position
                 </th>
                 <th className="font-medium text-black border-t border-l border-b border-black dark:border-white dark:text-white">
-                  Gaji <br /> Pokok
+                  Base Salary
                 </th>
                 <th className="font-medium text-black border-t border-l border-b border-black dark:border-white dark:text-white">
-                  Tunjangan <br />Transport
+                  Transport Allowance
                 </th>
                 <th className="font-medium text-black border-t border-l border-b border-black dark:border-white dark:text-white">
-                  Uang <br /> Makan
+                  Meal Allowance
                 </th>
                 <th className="font-medium text-black border-t border-l border-b border-black dark:border-white dark:text-white">
-                  Potongan
+                  Deductions
                 </th>
                 <th className="font-medium text-black border-t border-l border-b border-r border-black dark:border-white dark:text-white">
-                  Total <br /> Gaji
+                  Total Salary
                 </th>
               </tr>
             </thead>
@@ -195,11 +186,11 @@ const PrintPdfLaporanGaji = () => {
             <span className="p-26">Finance</span>
             <br />
             <br />
-            <span className="p-8 italic text-black dark:text-white">Tanda Tangan</span>
+            <span className="p-8 italic text-black dark:text-white">Signature</span>
           </div>
         </div>
         <div className="italic text-black dark:text-white mt-40">
-          Dicetak Pada : {`${new Date().getDate()} ${bulan} ${tahun}`}
+          Printed On: {`${new Date().getDate()} ${bulan} ${tahun}`}
         </div>
       </div>
     </>

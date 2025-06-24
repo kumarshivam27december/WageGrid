@@ -71,7 +71,7 @@ export const updateDataKehadiran = (id, dataKehadiran) => {
             if (response.status === 200) {
                 dispatch({
                     type: UPDATE_DATA_KEHADIRAN_SUCCESS,
-                    payload: 'Data kehadiran berhasil diupdate'
+                    payload: 'Attendance data successfully updated'
                 });
                 dispatch(getDataKehadiran());
             } else {
@@ -96,7 +96,7 @@ export const deleteDataKehadiran = (id) => {
             if (response.status === 200) {
                 dispatch({
                     type: DELETE_DATA_KEHADIRAN_SUCCESS,
-                    payload: 'Delete data berhasil'
+                    payload: 'Attendance data successfully deleted'
                 });
                 dispatch(getDataKehadiran());
             } else {

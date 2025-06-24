@@ -45,7 +45,7 @@ const FormEditDataPegawai = () => {
             setMsg(response.data.msg);
             Swal.fire({
                 icon: 'success',
-                title: 'Berhasil',
+                title: 'Success',
                 timer: 1500,
                 text: response.data.msg
             });
@@ -54,12 +54,12 @@ const FormEditDataPegawai = () => {
             setMsg(error.response.data.msg);
             Swal.fire({
                 icon: 'error',
-                title: 'Gagal',
+                title: 'Failed',
                 text: error.response.data.msg
             });
         }
     };
-    
+
     useEffect(() => {
         const getUserById = async () => {
             try {
@@ -97,13 +97,13 @@ const FormEditDataPegawai = () => {
 
     return (
         <Layout>
-            <Breadcrumb pageName='Form Edit Pegawai' />
+            <Breadcrumb pageName='Edit Employee Form' />
             <div className='sm:grid-cols-2'>
                 <div className='flex flex-col gap-9'>
                     <div className='rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark'>
                         <div className='border-b border-stroke py-4 px-6.5 dark:border-strokedark'>
                             <h3 className='font-medium text-black dark:text-white'>
-                                Form Edit Data Pegawai
+                                Edit Employee Data Form
                             </h3>
                         </div>
                         <form onSubmit={updateUser}>
@@ -121,14 +121,14 @@ const FormEditDataPegawai = () => {
                                             value={nik}
                                             onChange={(e) => setNik(e.target.value)}
                                             required
-                                            placeholder='Masukkan nomor nik'
+                                            placeholder='Enter NIK number'
                                             className='w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary'
                                         />
                                     </div>
 
                                     <div className='w-full xl:w-1/2'>
                                         <label className='mb-2.5 block text-black dark:text-white'>
-                                            Nama Lengkap <span className='text-meta-1'>*</span>
+                                            Full Name <span className='text-meta-1'>*</span>
                                         </label>
                                         <input
                                             type='text'
@@ -136,8 +136,8 @@ const FormEditDataPegawai = () => {
                                             name='namaPegawai'
                                             value={namaPegawai}
                                             onChange={(e) => setNamaPegawai(e.target.value)}
-                                            required={true}
-                                            placeholder='Masukkan nama lengkap'
+                                            required
+                                            placeholder='Enter full name'
                                             className='w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary'
                                         />
                                     </div>
@@ -148,20 +148,20 @@ const FormEditDataPegawai = () => {
                                             Username <span className='text-meta-1'>*</span>
                                         </label>
                                         <input
-                                            type='username'
+                                            type='text'
                                             id='username'
                                             name='username'
                                             value={username}
                                             onChange={(e) => setUsername(e.target.value)}
-                                            required={true}
-                                            placeholder='Masukkan username'
+                                            required
+                                            placeholder='Enter username'
                                             className='w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary'
                                         />
                                     </div>
 
                                     <div className='w-full xl:w-1/2'>
                                         <label className='mb-2.5 block text-black dark:text-white'>
-                                            Jenis Kelamin <span className='text-meta-1'>*</span>
+                                            Gender <span className='text-meta-1'>*</span>
                                         </label>
                                         <div className='relative z-20 bg-transparent dark:bg-form-input'>
                                             <select className='relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary'
@@ -169,23 +169,22 @@ const FormEditDataPegawai = () => {
                                                 name='jenisKelamin'
                                                 value={jenisKelamin}
                                                 onChange={(e) => setJenisKelamin(e.target.value)}
-                                                required={true}
+                                                required
                                             >
-                                                <option value='' disabled={true}>Pilih jenis kelamin</option>
-                                                <option value='laki-laki'>Laki-Laki</option>
-                                                <option value='perempuan'>Perempuan</option>
+                                                <option value='' disabled>Choose gender</option>
+                                                <option value='laki-laki'>Male</option>
+                                                <option value='perempuan'>Female</option>
                                             </select>
                                             <span className='absolute top-1/2 right-4 z-30 -translate-y-1/2 text-2xl'>
                                                 <MdOutlineKeyboardArrowDown />
                                             </span>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
                                     <div className='w-full xl:w-1/2'>
                                         <label className='mb-2.5 block text-black dark:text-white'>
-                                            Jabatan <span className='text-meta-1'>*</span>
+                                            Position <span className='text-meta-1'>*</span>
                                         </label>
                                         <input
                                             type='text'
@@ -193,14 +192,14 @@ const FormEditDataPegawai = () => {
                                             name='jabatan'
                                             value={jabatan}
                                             onChange={(e) => setJabatan(e.target.value)}
-                                            required={true}
-                                            placeholder='Masukkan jabatan'
+                                            required
+                                            placeholder='Enter position'
                                             className='w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary'
                                         />
                                     </div>
                                     <div className='w-full xl:w-1/2'>
                                         <label className='mb-2.5 block text-black dark:text-white'>
-                                            Tanggal Masuk <span className='text-meta-1'>*</span>
+                                            Joining Date <span className='text-meta-1'>*</span>
                                         </label>
                                         <input
                                             type='date'
@@ -208,7 +207,7 @@ const FormEditDataPegawai = () => {
                                             name='tanggalMasuk'
                                             value={tanggalMasuk}
                                             onChange={(e) => setTanggalMasuk(e.target.value)}
-                                            required={true}
+                                            required
                                             className='w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary'
                                         />
                                     </div>
@@ -217,7 +216,7 @@ const FormEditDataPegawai = () => {
                                 <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
                                     <div className='w-full xl:w-1/2'>
                                         <label className='mb-2.5 block text-black dark:text-white'>
-                                            Status <span className='text-meta-1'>*</span>
+                                            Employment Status <span className='text-meta-1'>*</span>
                                         </label>
                                         <div className='relative z-20 bg-transparent dark:bg-form-input'>
                                             <select className='relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary'
@@ -225,11 +224,11 @@ const FormEditDataPegawai = () => {
                                                 name='status'
                                                 value={status}
                                                 onChange={(e) => setStatus(e.target.value)}
-                                                required={true}
+                                                required
                                             >
-                                                <option value='' disabled={true}>Pilih status</option>
-                                                <option value='karyawan tetap'>Karyawan Tetap</option>
-                                                <option value='karyawan tidak tetap'>Karyawan Tidak Tetap</option>
+                                                <option value='' disabled>Choose status</option>
+                                                <option value='karyawan tetap'>Permanent Employee</option>
+                                                <option value='karyawan tidak tetap'>Contract Employee</option>
                                             </select>
                                             <span className='absolute top-1/2 right-4 z-30 -translate-y-1/2 text-2xl'>
                                                 <MdOutlineKeyboardArrowDown />
@@ -238,7 +237,7 @@ const FormEditDataPegawai = () => {
                                     </div>
                                     <div className='w-full xl:w-1/2'>
                                         <label className='mb-2.5 block text-black dark:text-white'>
-                                            Hak Akses <span className='text-meta-1'>*</span>
+                                            Access Rights <span className='text-meta-1'>*</span>
                                         </label>
                                         <div className='relative z-20 bg-transparent dark:bg-form-input'>
                                             <select className='relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary'
@@ -246,11 +245,11 @@ const FormEditDataPegawai = () => {
                                                 name='hak_akses'
                                                 value={hakAkses}
                                                 onChange={(e) => setHakAkses(e.target.value)}
-                                                required={true}
+                                                required
                                             >
-                                                <option value='' disabled={true}>Pilih hak akses</option>
+                                                <option value='' disabled>Choose access level</option>
                                                 <option value='admin'>Admin</option>
-                                                <option value='pegawai'>Pegawai</option>
+                                                <option value='pegawai'>Employee</option>
                                             </select>
                                             <span className='absolute top-1/2 right-4 z-30 -translate-y-1/2 text-2xl'>
                                                 <MdOutlineKeyboardArrowDown />
@@ -261,13 +260,13 @@ const FormEditDataPegawai = () => {
 
                                 <div className='flex flex-col md:flex-row w-full gap-3 text-center'>
                                     <div>
-                                        <ButtonOne  >
-                                            <span>Perbarui</span>
+                                        <ButtonOne>
+                                            <span>Update</span>
                                         </ButtonOne>
                                     </div>
-                                    <Link to="/data-pegawai" >
-                                        <ButtonTwo  >
-                                            <span>Kembali</span>
+                                    <Link to="/data-pegawai">
+                                        <ButtonTwo>
+                                            <span>Back</span>
                                         </ButtonTwo>
                                     </Link>
                                 </div>

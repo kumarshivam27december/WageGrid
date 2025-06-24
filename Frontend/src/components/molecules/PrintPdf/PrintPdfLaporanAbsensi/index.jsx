@@ -35,7 +35,7 @@ const PrintPdfLaporanAbsensi = () => {
 
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
-        documentTitle: "Laporan_Kehadiran_Pegawai_PT. Humpuss Karbometil Selulosa",
+        documentTitle: "Employee_Attendance_Report_PT. Humpuss Karbometil Selulosa",
     });
 
     useEffect(() => {
@@ -61,8 +61,8 @@ const PrintPdfLaporanAbsensi = () => {
     useEffect(() => {
         const today = new Date();
         const monthNames = [
-            "Januari", "Februari", "Maret", "April", "Mei", "Juni",
-            "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
         ];
         const month = monthNames[today.getMonth()];
         const year = today.getFullYear();
@@ -75,42 +75,42 @@ const PrintPdfLaporanAbsensi = () => {
             <div className="flex flex-col md:flex-row w-full gap-3 text-center p-6 bg-white dark:bg-meta-4">
                 <div>
                     <ButtonOne onClick={handlePrint}>
-                        <span>Cetak</span>
+                        <span>Print</span>
                     </ButtonOne>
                 </div>
                 <Link to="/laporan/absensi">
                     <ButtonTwo>
-                        <span>Kembali</span>
+                        <span>Back</span>
                     </ButtonTwo>
                 </Link>
-            </div >
+            </div>
             <div ref={componentRef} className="w-200% h-100% p-10 bg-white dark:bg-meta-4">
                 <div className="flex items-center gap-24 object-cover border-b-4 border-black dark:border-white">
                     <img className="w-35"
                         src={LogoSipeka}
-                        title="Logo SiPeKa"
-                        alt="Logo SiPeKa" />
+                        title="SiPeKa Logo"
+                        alt="SiPeKa Logo" />
                     <h1 className="text-black text-2xl font-bold boder  dark:text-white">
                         PT. Humpuss Karbometil Selulosa
                     </h1>
                     <img className="w-35"
                         src={LogoPt}
-                        title="Logo PT.Humpuss Karbometil Selulosa"
-                        alt="Logo PT.Humpuss Karbometil Selulosa"
+                        title="Company Logo"
+                        alt="Company Logo"
                     />
                 </div>
                 <h1 className="text-center text-black my-4 text-xl font-medium boder py-2 dark:text-white">
-                    Laporan Kehadiran Pegawai
+                    Employee Attendance Report
                 </h1>
                 <div className="w-full md:text-lg">
                     <h2 className="font-medium mb-4 block text-black dark:text-white">
-                        <span className="inline-block w-32 md:w-40">Bulan</span>
+                        <span className="inline-block w-32 md:w-40">Month</span>
                         <span className="pl-[-8] md:pl-0"></span>
                         <span className="inline-block w-7">:</span>
                         {month}
                     </h2>
                     <h2 className="font-medium mb-4 block text-black dark:text-white">
-                        <span className="inline-block w-32 md:w-40">Tahun</span>
+                        <span className="inline-block w-32 md:w-40">Year</span>
                         <span className="inline-block w-7">:</span>
                         {year}
                         <span className="pl-[-8] md:pl-0"></span>
@@ -127,19 +127,19 @@ const PrintPdfLaporanAbsensi = () => {
                                     NIK
                                 </th>
                                 <th className="font-medium text-black border-t border-l border-b border-black dark:border-white dark:text-white">
-                                    Nama <br /> Pegawai
+                                    Employee Name
                                 </th>
                                 <th className="font-medium text-black border-t border-l border-b border-black dark:border-white dark:text-white">
-                                    Jabatan
+                                    Position
                                 </th>
                                 <th className="font-medium text-black border-t border-l border-b border-black dark:border-white dark:text-white">
-                                    Hadir
+                                    Present
                                 </th>
                                 <th className="font-medium text-black border-t border-l border-b border-black dark:border-white dark:text-white">
-                                    Sakit
+                                    Sick
                                 </th>
                                 <th className="font-medium text-black border-t border-l border-b border-r border-black dark:border-white dark:text-white">
-                                    Alpha
+                                    Absent
                                 </th>
                             </tr>
                         </thead>
@@ -181,11 +181,11 @@ const PrintPdfLaporanAbsensi = () => {
                         <span className="p-26">Finance</span>
                         <br />
                         <br />
-                        <span className="p-8 italic text-black dark:text-white">Tanda Tangan</span>
+                        <span className="p-8 italic text-black dark:text-white">Signature</span>
                     </div>
                 </div>
                 <div className="italic text-black dark:text-white mt-70">
-                    Dicetak Pada : {`${new Date().getDate()} ${bulan} ${tahun}`}
+                    Printed On: {`${new Date().getDate()} ${bulan} ${tahun}`}
                 </div>
             </div>
         </>

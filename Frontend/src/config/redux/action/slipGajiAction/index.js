@@ -28,7 +28,7 @@ export const fetchSlipGajiByYear = (selectedYear, onDataFound) => async (dispatc
         onDataFound();
     } catch (error) {
         if (error.response && error.response.data) {
-            dispatch(fetchSlipGajiFailure("Terjadi kesalahan saat memuat data."));
+            dispatch(fetchSlipGajiFailure("An error occurred while loading data."));
         }
     }
 };
@@ -43,7 +43,7 @@ export const fetchSlipGajiByMonth = (selectedMonth, onDataFound) => async (dispa
         onDataFound();
     } catch (error) {
         if (error.response && error.response.data) {
-            dispatch(fetchSlipGajiFailure("Terjadi kesalahan saat memuat data."));
+            dispatch(fetchSlipGajiFailure("An error occurred while loading data."));
         }
     }
 };
@@ -58,7 +58,7 @@ export const fetchSlipGajiByName = (selectedName, onDataFound) => async (dispatc
         onDataFound();
     } catch (error) {
         if (error.response && error.response.data) {
-            dispatch(fetchSlipGajiFailure("Terjadi kesalahan saat memuat data."));
+            dispatch(fetchSlipGajiFailure("An error occurred while loading data."));
         }
     }
 };

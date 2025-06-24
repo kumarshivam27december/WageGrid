@@ -21,20 +21,20 @@ const DropdownProfil = () => {
 
   const onLogout = () => {
     Swal.fire({
-      title: 'Konfirmasi',
-      text: 'Apakah Anda yakin ingin keluar?',
+      title: 'Confirmation',
+      text: 'Are you sure you want to log out?',
       icon: 'question',
       showCancelButton: true,
-      confirmButtonText: 'Ya',
-      cancelButtonText: 'Tidak',
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
       reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(logoutUser());
         dispatch(reset());
         Swal.fire({
-          title: 'Logout Berhasil',
-          text: 'Anda telah berhasil keluar.',
+          title: 'Logout Successful',
+          text: 'You have been logged out successfully.',
           icon: 'success',
           timer: 1500,
           timerProgressBar: true,
@@ -113,7 +113,7 @@ const DropdownProfil = () => {
             <img
               className='h-full w-full object-cover'
               src={`http://localhost:5000/images/${dataPegawai.photo}`}
-              alt='Profil'
+              alt='Profile'
             />
           </div>
           <MdKeyboardArrowDown className='text-xl' />
@@ -132,7 +132,7 @@ const DropdownProfil = () => {
                 className='flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base'
               >
                 <FiSettings className='text-xl' />
-                Pengaturan
+                Settings
               </Link>
             </li>
             <li>

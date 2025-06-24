@@ -19,9 +19,9 @@ export default function Navbar() {
     };
 
     const navLinks = [
-        { title: "Beranda", link: "/", icon: <FaHome /> },
-        { title: "Tentang", link: "/tentang", icon: <RiFolderInfoFill /> },
-        { title: "Kontak", link: "/kontak", icon: <RiContactsBook2Fill /> },
+        { title: "Home", link: "/", icon: <FaHome /> },
+        { title: "About", link: "/tentang", icon: <RiFolderInfoFill /> },
+        { title: "Contact", link: "/kontak", icon: <RiContactsBook2Fill /> },
     ];
 
     const activeLink = ({ isActive }) => {
@@ -61,7 +61,7 @@ export default function Navbar() {
                         <img
                             src={LogoSipeka}
                             alt="Logo SiPeKa"
-                            className="w-40"
+                            className="navbar-logo"
                             title="Logo SiPeKa"
                         />
                     </Link>
@@ -137,7 +137,7 @@ export default function Navbar() {
                             </ul>
                             <div className="text-center dark:bg-boxdark-2">
                                 <p className="text-accent dark:text-accent">
-                                    &copy; Copyright 2023, PT. Humpus Karbometil Selulosa. All Rights Reserved
+                                    &copy; Copyright 2025, Shivam Kumar. All rights reserved.
                                 </p>
                             </div>
                         </Drawer>

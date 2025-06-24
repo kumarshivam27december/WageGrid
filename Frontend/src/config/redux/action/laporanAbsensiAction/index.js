@@ -28,7 +28,7 @@ export const fetchLaporanAbsensiByYear = (selectedYear, onDataFound) => async (d
         onDataFound();
     } catch (error) {
         if (error.response && error.response.data) {
-            dispatch(fetchLaporanAbsensiFailure("Terjadi kesalahan saat memuat data."));
+            dispatch(fetchLaporanAbsensiFailure("An error occurred while loading data."));
         }
     }
 };
@@ -43,7 +43,7 @@ export const fetchLaporanAbsensiByMonth = (selectedMonth, onDataFound) => async 
         onDataFound();
     } catch (error) {
         if (error.response && error.response.data) {
-            dispatch(fetchLaporanAbsensiFailure("Terjadi kesalahan saat memuat data."));
+            dispatch(fetchLaporanAbsensiFailure("An error occurred while loading data."));
         }
     }
 };

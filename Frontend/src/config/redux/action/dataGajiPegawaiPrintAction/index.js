@@ -23,7 +23,7 @@ export const viewGajiSinglePegawaiByYear = (dataYear) => async (dispatch) => {
         dispatch(viewDataGajiSinglePegawaiSuccess(data));
     } catch (error) {
         if (error.response && error.response.data) {
-            dispatch(viewDataGajiSinglePegawaiFailure("Terjadi kesalahan saat memuat data."));
+            dispatch(viewDataGajiSinglePegawaiFailure("An error occurred while loading data."));
         }
     }
 };
@@ -37,7 +37,7 @@ export const viewGajiSinglePegawaiByMonth = (dataMonth) => async (dispatch) => {
         dispatch(viewDataGajiSinglePegawaiSuccess(data));
     } catch (error) {
         if (error.response && error.response.data) {
-            dispatch(viewDataGajiSinglePegawaiFailure("Terjadi kesalahan saat memuat data."));
+            dispatch(viewDataGajiSinglePegawaiFailure("An error occurred while loading data."));
         }
     }
 };
@@ -52,7 +52,7 @@ export const viewGajiSinglePegawaiByName = (nama_pegawai) => async (dispatch) =>
     } catch (error) {
         console.log(error);
         if (nama_pegawai) {
-            dispatch(viewDataGajiSinglePegawaiFailure("Terjadi kesalahan saat memuat data."));
+            dispatch(viewDataGajiSinglePegawaiFailure("An error occurred while loading data."));
         }
     }
 };
