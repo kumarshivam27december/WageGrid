@@ -121,7 +121,7 @@ class ChartTwo extends Component {
               <span className='mr-2 block h-3 w-full max-w-3 rounded-full bg-[#8FD0EF]'></span>
               <p className='flex w-full justify-between text-sm font-medium text-black dark:text-white'>
                 <span> Contract Employee </span>
-                <span> 4 </span>
+                <span> 1 </span>
               </p>
             </div>
           </div>
