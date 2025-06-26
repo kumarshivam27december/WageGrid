@@ -1,5 +1,5 @@
-import DataJabatan from "../models/DataJabatanModel.js";
-import DataPegawai from "../models/DataPegawaiModel.js";
+import DataJabatan from "../models/positionmodel.js";
+import DataPegawai from "../models/employeemodel.js";
 
 // menampilkan semua data jabatan
 export const getDataJabatan = async (req, res) => {

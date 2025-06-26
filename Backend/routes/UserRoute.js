@@ -12,7 +12,7 @@ import {
     deleteDataPegawai,
     getDataPegawaiByNik,
     getDataPegawaiByName,
-} from '../controllers/DataPegawai.js';
+} from '../controllers/employeedata.js';
 
 import {
     getDataJabatan,
@@ -20,7 +20,7 @@ import {
     updateDataJabatan,
     deleteDataJabatan,
     getDataJabatanByID
-} from "../controllers/DataJabatan.js";
+} from "../controllers/jobdata.js";
 
 import {
     viewDataKehadiran,
@@ -29,7 +29,7 @@ import {
     deleteDataKehadiran,
     viewDataKehadiranByID,
     viewDataGajiByName,
-} from "../controllers/TransaksiController.js";
+} from "../controllers/transactioncontroller.js";
 
 import {
     createDataPotonganGaji,
@@ -37,13 +37,13 @@ import {
     viewDataPotonganByID,
     updateDataPotongan,
     viewDataPotongan
-} from "../controllers/TransaksiController.js";
+} from "../controllers/transactioncontroller.js";
 
 import {
     viewDataGajiPegawai,
     viewDataGajiPegawaiByMonth,
     viewDataGajiPegawaiByYear
-} from "../controllers/TransaksiController.js";
+} from "../controllers/transactioncontroller.js";
 
 import {
     viewLaporanAbsensiPegawaiByMonth,
@@ -55,14 +55,14 @@ import {
     viewSlipGajiByMonth,
     viewSlipGajiByName,
     viewSlipGajiByYear,
-} from "../controllers/LaporanController.js";
+} from "../controllers/reportcontroller.js";
 
 import { LogOut, changePassword } from '../controllers/Auth.js';
 import {
     dashboardPegawai,
     viewDataGajiSinglePegawaiByMonth,
     viewDataGajiSinglePegawaiByYear
-} from '../controllers/Pegawai.js';
+} from '../controllers/employee.js';
 
 const router = express.Router();
 

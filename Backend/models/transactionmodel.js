@@ -1,6 +1,6 @@
-import DataPegawai from './DataPegawaiModel.js';
-import DataJabatan from './DataJabatanModel.js';
-import DataKehadiran from './DataKehadiranModel.js';
+import DataPegawai from './employeemodel.js';
+import DataJabatan from './positionmodel.js';
+import DataKehadiran from './presencemodel.js';
 
 /* Method untuk mengambil Data Pegawai */
 

@@ -1,7 +1,7 @@
-import DataKehadiran from "../models/DataKehadiranModel.js";
-import DataPegawai from "../models/DataPegawaiModel.js";
-import DataJabatan from "../models/DataJabatanModel.js";
-import PotonganGaji from "../models/PotonganGajiModel.js";
+import DataKehadiran from "../models/presencemodel.js";
+import DataPegawai from "../models/employeemodel.js";
+import DataJabatan from "../models/positionmodel.js";
+import PotonganGaji from "../models/salarydeductionmodel.js";
 import moment from "moment";
 import "moment/locale/id.js";
 

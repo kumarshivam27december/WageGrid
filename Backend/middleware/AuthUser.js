@@ -1,4 +1,4 @@
-import DataPegawai from '../models/DataPegawaiModel.js'
+import DataPegawai from '../models/employeemodel.js'
 
 export const verifyUser = async(req, res, next) =>{
     if(!req.session.userId){

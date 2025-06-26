@@ -1,4 +1,4 @@
-import DataPegawai from "../models/DataPegawaiModel.js";
+import DataPegawai from "../models/employeemodel.js";
 import argon2 from "argon2";
 import path from "path";
 

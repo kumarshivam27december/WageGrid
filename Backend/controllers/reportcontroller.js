@@ -2,7 +2,7 @@ import {
     getDataGajiPegawai,
     getDataKehadiran,
     viewDataGajiPegawaiByYear
-} from "./TransaksiController.js"
+} from "./transactioncontroller.js"
 
 // method untuk melihat laporan gaji pegawai
 export const viewLaporanGajiPegawai = async(req, res) => {

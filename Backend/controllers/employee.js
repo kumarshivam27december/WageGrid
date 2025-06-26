@@ -1,6 +1,6 @@
-import DataPegawai from "../models/DataPegawaiModel.js";
-import DataKehadiran from "../models/DataKehadiranModel.js";
-import { getDataGajiPegawai } from "./TransaksiController.js";
+import DataPegawai from "../models/employeemodel.js";
+import DataKehadiran from "../models/presencemodel.js";
+import { getDataGajiPegawai } from "./transactioncontroller.js";
 import { verifyUser } from "../middleware/AuthUser.js";
 
 // method untuk dashboard pegawai
