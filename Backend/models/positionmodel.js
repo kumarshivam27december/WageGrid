@@ -26,6 +26,10 @@ export const PositionSchema = new mongoose.Schema({
     type: String,
     required: true
   }
-}, { collection: 'positions' });
+}, { 
+  collection: 'positions',
+  timestamps: true
+});
 
-export default mongoose.model('Position', PositionSchema);
+const Position = mongoose.model('Position', PositionSchema);
+export default Position;
