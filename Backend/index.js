@@ -41,7 +41,7 @@ app.use(session({
 }));
 
 app.use(cors({
-    origin: ['https://sparkly-mooncake-4f628e.netlify.app', 'http://localhost:5173'],
+    origin: ['https://lively-moonbeam-e659fe.netlify.app', 'http://localhost:5173'],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type'],
