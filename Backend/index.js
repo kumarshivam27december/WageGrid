@@ -40,7 +40,10 @@ app.use(session({
 
 app.use(cors ({
     credentials: true,
-    origin: 'http://localhost:5173'
+    origin: [
+        'http://localhost:5173',
+        'https://stalwart-fox-042a25.netlify.app'
+    ]
 }));
 
 app.use(express.json());
