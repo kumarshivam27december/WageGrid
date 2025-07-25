@@ -27,7 +27,7 @@ db.once('open', () => {
 
 
 app.use(cors({
-  origin: 'https://lively-moonbeam-e659fe.netlify.app/', // your real frontend domain
+  origin: 'https://lively-moonbeam-e659fe.netlify.app', // your real frontend domain
   credentials: true
 }));
 
