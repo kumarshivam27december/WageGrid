@@ -48,7 +48,7 @@ A modern React frontend for the Employee Salary Management System built with Vit
 
 - Node.js (v16 or higher)
 - npm or yarn
-- Backend server running on `http://localhost:5000`
+- Backend server running on `https://wagegrid.onrender.com`
 
 ### Installation
 

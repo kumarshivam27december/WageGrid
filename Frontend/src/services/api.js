@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = 'https://wagegrid.onrender.com/api';
 
 class ApiService {
   constructor() {
@@ -295,4 +295,4 @@ class ApiService {
 }
 
 const api = new ApiService();
-export default api; 
+export default api;
