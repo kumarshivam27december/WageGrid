@@ -42,7 +42,7 @@ app.use(cors ({
     credentials: true,
     origin: [
         'http://localhost:5173',
-        'https://stalwart-fox-042a25.netlify.app'
+        'https://strong-moxie-3872e5.netlify.app'
     ]
 }));
 
