@@ -27,12 +27,10 @@ db.once('open', () => {
 
 
 app.use(cors({
-    origin: ['https://lively-moonbeam-e659fe.netlify.app', 'http://localhost:5173'],
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type'],
-    exposedHeaders: ['Set-Cookie']
-  }));
+  origin: 'https://lively-moonbeam-e659fe.netlify.app/', // your real frontend domain
+  credentials: true
+}));
+
   
 
 app.use(express.json());
@@ -49,6 +47,7 @@ app.use(session({
         collectionName: 'sessions'
     }),
     cookie: {
+          httpOnly: true,
         sameSite: 'none', // must be 'none' for cross-origin cookies
         secure: true      // must be true when using HTTPS (Render uses HTTPS)
     }
