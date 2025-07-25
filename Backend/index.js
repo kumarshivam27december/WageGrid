@@ -24,21 +24,7 @@ db.once('open', () => {
     console.log('Connected to MongoDB');
 });
 
-// Middleware
-app.use(session({
-    secret: process.env.SESS_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    store: MongoStore.create({
-        mongoUrl: process.env.MONGO_URI,
-        collectionName: 'sessions'
-    }),
-    cookie: {
-        sameSite: 'none', // must be 'none' for cross-origin cookies
-        secure: true      // must be true when using HTTPS (Render uses HTTPS)
-    }
 
-}));
 
 app.use(cors({
     origin: ['https://lively-moonbeam-e659fe.netlify.app', 'http://localhost:5173'],
@@ -52,6 +38,23 @@ app.use(cors({
 app.use(express.json());
 app.use(FileUpload());
 app.use(express.static("public"));
+
+// Middleware
+app.use(session({
+    secret: process.env.SESS_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGO_URI,
+        collectionName: 'sessions'
+    }),
+    cookie: {
+        sameSite: 'none', // must be 'none' for cross-origin cookies
+        secure: true      // must be true when using HTTPS (Render uses HTTPS)
+    }
+
+}));
+
 
 // Mount routes under /api prefix
 app.use('/api', UserRoute);
