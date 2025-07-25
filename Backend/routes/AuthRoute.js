@@ -1,10 +1,12 @@
 import express from 'express';
-import { Login, LogOut, Me} from "../controllers/Auth.js";
+import { login, logout, getCurrentUser, changePassword } from "../controllers/Auth.js";
+import { verifyUser } from "../middleware/AuthUser.js";
 
 const router = express.Router();
 
-router.get('/me', Me);
-router.post('/login', Login);
-router.delete('/logout', LogOut);
+router.get('/me', getCurrentUser);
+router.post('/login', login);
+router.delete('/logout', logout);
+router.patch('/change_password', verifyUser, changePassword);
 
 export default router;

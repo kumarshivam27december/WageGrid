@@ -1,43 +1,43 @@
 import mongoose from 'mongoose';
 
-const DataKehadiranSchema = new mongoose.Schema({
-    id: {
-        type: Number,
-        required: true,
-        unique: true
-    },
-    bulan: {
-        type: String,
-        required: true,
-        maxlength: 15
-    },
-    nik: {
-        type: String,
-        required: true,
-        maxlength: 16
-    },
-    nama_pegawai: {
-        type: String,
-        required: true,
-        maxlength: 100
-    },
-    jenis_kelamin: {
-        type: String,
-        maxlength: 20
-    },
-    nama_jabatan: {
-        type: String,
-        maxlength: 50
-    },
-    hadir: {
-        type: Number
-    },
-    sakit: {
-        type: Number
-    },
-    alpha: {
-        type: Number
-    }
-}, { collection: 'data_kehadiran' });
+export const AttendanceSchema = new mongoose.Schema({
+  attendance_id: {
+    type: Number,
+    required: true,
+    unique: true
+  },
+  month: {
+    type: String,
+    required: true,
+    maxlength: 15
+  },
+  employee_nik: {
+    type: String,
+    required: true,
+    maxlength: 16
+  },
+  employee_name: {
+    type: String,
+    required: true,
+    maxlength: 100
+  },
+  gender: {
+    type: String,
+    maxlength: 20
+  },
+  position_name: {
+    type: String,
+    maxlength: 50
+  },
+  present_days: {
+    type: Number
+  },
+  sick_days: {
+    type: Number
+  },
+  absent_days: {
+    type: Number
+  }
+}, { collection: 'attendances' });
 
-export default mongoose.model('DataKehadiran', DataKehadiranSchema);
+export default mongoose.model('Attendance', AttendanceSchema);

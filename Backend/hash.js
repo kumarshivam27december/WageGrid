@@ -11,4 +11,4 @@ async function hashPassword(password) {
 }
 
 // Example usage:
-hashPassword('admin123');
+hashPassword('password');

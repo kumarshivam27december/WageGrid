@@ -47,9 +47,10 @@ app.use(express.json());
 app.use(FileUpload());
 app.use(express.static("public"));
 
-app.use(UserRoute);
-app.use(AuthRoute);
+// Mount routes under /api prefix
+app.use('/api', UserRoute);
+app.use('/api', AuthRoute);
 
 app.listen(process.env.APP_PORT, () => {
-    console.log('Server up and running...');
+    console.log('Server up and running... at port ' + process.env.APP_PORT);
 });

@@ -1,118 +1,111 @@
-import DataPegawai from "../models/employeemodel.js";
-import DataKehadiran from "../models/presencemodel.js";
-import { getDataGajiPegawai } from "./transactioncontroller.js";
+import Employee from "../models/employeemodel.js";
+import Attendance from "../models/presencemodel.js";
+import { getEmployeeSalaryData } from "./transactioncontroller.js";
 import { verifyUser } from "../middleware/AuthUser.js";
 
-// method untuk dashboard pegawai
-export const dashboardPegawai = async (req, res) => {
-    await verifyUser(req, res, () => {});
-
-    const userId = req.userId;
-
-    const response = await DataPegawai.findOne({
-      where:{
-        id: userId
-      },
-      attributes: [
-        'id', 'nik', 'nama_pegawai',
-        'jenis_kelamin', 'jabatan', 'tanggal_masuk',
-        'status', 'photo', 'hak_akses'
-      ]
-    });
-
-    res.status(200).json(response);
-  };
-
-// method untuk view gaji single pegawai by month
-export const viewDataGajiSinglePegawaiByMonth = async (req, res) => {
+// Method for employee dashboard
+export const employeeDashboard = async (req, res) => {
   await verifyUser(req, res, () => {});
 
   const userId = req.userId;
-  const user = await DataPegawai.findOne({
-    where:{
-      id: userId
-    }
+
+  const response = await Employee.findOne({
+    _id: userId
+  }).select('_id national_id employee_name gender position date_joined employment_status photo role');
+
+  res.status(200).json(response);
+};
+
+// Method to view salary data of a single employee by month
+export const viewEmployeeSalaryByMonth = async (req, res) => {
+  await verifyUser(req, res, () => {});
+
+  const userId = req.userId;
+  const user = await Employee.findOne({
+    _id: userId
   });
 
   try {
-      const dataGajiPegawai = await getDataGajiPegawai();
+    const employeeSalaryData = await getEmployeeSalaryData();
 
-      const response = await DataKehadiran.findOne({
-          attributes: [
-              'bulan'
-          ],
-          where: {
-              bulan: req.params.month
-          }
-      });
+    const attendanceRecord = await Attendance.findOne({
+      month: req.params.month
+    }).select('month');
 
-      if (response) {
-        const dataGajiByMonth = dataGajiPegawai.filter((data_gaji) => {
-          return data_gaji.id === user.id && data_gaji.bulan === response.bulan;
-        }).map((data_gaji) => {
+    if (attendanceRecord) {
+      const salaryDataByMonth = employeeSalaryData
+        .filter((salary) => {
+          return (
+            salary.id === user._id.toString() &&
+            salary.month === attendanceRecord.month
+          );
+        })
+        .map((salary) => {
           return {
-            bulan: response.bulan,
-            tahun: data_gaji.tahun,
-            nik: user.nik,
-            nama_pegawai: user.nama_pegawai,
-            jenis_kelamin: user.jenis_kelamin,
-            jabatan: user.jabatan,
-            gaji_pokok: data_gaji.gaji_pokok,
-            tj_transport: data_gaji.tj_transport,
-            uang_makan: data_gaji.uang_makan,
-            potongan: data_gaji.potongan,
-            total_gaji: data_gaji.total,
+            month: attendanceRecord.month,
+            year: salary.year,
+            national_id: user.national_id,
+            employee_name: user.employee_name,
+            gender: user.gender,
+            position: user.position,
+            base_salary: salary.baseSalary,
+            transport_allowance: salary.transportAllowance,
+            meal_allowance: salary.mealAllowance,
+            deduction: salary.deduction,
+            total_salary: salary.total
           };
         });
-          return res.json(dataGajiByMonth);
-      }
 
-      res.status(404).json({ msg: `Data Gaji Untuk Bulan ${req.params.month} Tidak di Temukan Pada Pegawai ${user.nama_pegawai}` });
+      return res.json(salaryDataByMonth);
+    }
+
+    res.status(404).json({
+      msg: `Salary data for month ${req.params.month} not found for employee ${user.employee_name}`
+    });
   } catch (error) {
-      res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
-// method untuk view gaji single pegawai by year
-export const viewDataGajiSinglePegawaiByYear = async (req, res) => {
+// Method to view salary data of a single employee by year
+export const viewEmployeeSalaryByYear = async (req, res) => {
   await verifyUser(req, res, () => {});
 
   const userId = req.userId;
-  const user = await DataPegawai.findOne({
-    where:{
-      id: userId
-    }
+  const user = await Employee.findOne({
+    _id: userId
   });
 
   try {
-    const dataGajiPegawai = await getDataGajiPegawai();
+    const employeeSalaryData = await getEmployeeSalaryData();
     const { year } = req.params;
 
-    const dataGajiByYear = dataGajiPegawai.filter((data_gaji) => {
-        return data_gaji.id === user.id && data_gaji.tahun === parseInt(year);
-    }).map((data_gaji) => {
+    const salaryDataByYear = employeeSalaryData
+      .filter((salary) => {
+        return salary.id === user._id.toString() && salary.year === parseInt(year);
+      })
+      .map((salary) => {
         return {
-            tahun: data_gaji.tahun,
-            bulan: data_gaji.bulan,
-            nik: user.nik,
-            nama_pegawai: user.nama_pegawai,
-            jenis_kelamin: user.jenis_kelamin,
-            jabatan: user.jabatan,
-            gaji_pokok: data_gaji.gaji_pokok,
-            tj_transport: data_gaji.tj_transport,
-            uang_makan: data_gaji.uang_makan,
-            potongan: data_gaji.potongan,
-            total_gaji: data_gaji.total,
+          year: salary.year,
+          month: salary.month,
+          national_id: user.national_id,
+          employee_name: user.employee_name,
+          gender: user.gender,
+          position: user.position,
+          base_salary: salary.baseSalary,
+          transport_allowance: salary.transportAllowance,
+          meal_allowance: salary.mealAllowance,
+          deduction: salary.deduction,
+          total_salary: salary.total
         };
-    });
+      });
 
-    if (dataGajiByYear.length === 0) {
-        return res.status(404).json({ msg: `Data Tahun ${year} Tidak di Temukan` });
+    if (salaryDataByYear.length === 0) {
+      return res.status(404).json({ msg: `No data found for year ${year}` });
     }
-    res.json(dataGajiByYear)
-  } catch (error) {
-      res.status(500).json({ error: 'Internal Server Error' });
-  }
-}
 
-// data yang ditampilkan ( Bulan / Tahun, Gaji Pokok, tj_transport, Uang Makan, Potongan, Total Gaji  )
+    res.json(salaryDataByYear);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};

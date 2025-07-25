@@ -1,83 +1,100 @@
-import DataPegawai from './employeemodel.js';
-import DataJabatan from './positionmodel.js';
-import DataKehadiran from './presencemodel.js';
+import EmployeeModel from './employeemodel.js';
+import PositionModel from './positionmodel.js';
+import PresenceModel from './presencemodel.js';
 
-/* Method untuk mengambil Data Pegawai */
+/* Method to fetch Employee Data */
 
-async function getDataPegawai() {
+async function getEmployeeData() {
     try {
-        const dataPegawai = await DataPegawai.find();
-        const dataPegawaiMap = new Map();
-        dataPegawai.forEach(pegawai => {
-            const {nik, nama_pegawai, jabatan} = pegawai;
-            dataPegawaiMap.set(nama_pegawai, {nik, jabatan});
+        const employees = await EmployeeModel.find();
+        const employeeMap = new Map();
+
+        employees.forEach(emp => {
+            const { nik, employee_name, position } = emp;
+            employeeMap.set(employee_name, { nik, position });
         });
 
-        const resultDataPegawai = [];
-        dataPegawaiMap.forEach(({nik, jabatan}, nama_pegawai) => {
-            resultDataPegawai.push({nik, nama_pegawai, jabatan});
+        const result = [];
+        employeeMap.forEach(({ nik, position }, employee_name) => {
+            result.push({ nik, employee_name, position });
         });
 
-        const data_nama_pegawai = resultDataPegawai.map(pegawai => pegawai.nama_pegawai);
-        const data_nik = resultDataPegawai.map(pegawai => pegawai.nik);
-        const data_jabatan = resultDataPegawai.map(pegawai => pegawai.jabatan);
+        const employeeNames = result.map(emp => emp.employee_name);
+        const employeeNIKs = result.map(emp => emp.nik);
+        const employeePositions = result.map(emp => emp.position);
 
-        return { data_nama_pegawai, data_nik, data_jabatan };
+        return { employeeNames, employeeNIKs, employeePositions };
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 }
 
-/* Method untuk mengambil Data Kehadiran */
+/* Method to fetch Presence Data */
 
-async function getDataKehadiran() {
+async function getPresenceData() {
     try {
-        const dataKehadiran = await DataKehadiran.find();
-        const dataKehadiranMap = new Map();
+        const presences = await PresenceModel.find();
+        const presenceMap = new Map();
 
-        const { data_nama_pegawai } = await getDataPegawai();
-        const { data_nik } = await getDataPegawai();
+        const { employeeNames, employeeNIKs } = await getEmployeeData();
 
-        dataKehadiran.forEach(kehadiran => {
-            const { nik, bulan, jenis_kelamin, nama_jabatan, hadir, sakit, alpha } = kehadiran;
-            const nama_pegawai = data_nama_pegawai.find(nama => nama === kehadiran.nama_pegawai) || "-";
-            const nik_pegawai = data_nik.find(nik => nik === kehadiran.nik) || "-";
-            dataKehadiranMap.set(nik_pegawai, { nama_pegawai, bulan, jenis_kelamin, nama_jabatan, hadir, sakit, alpha });
+        presences.forEach(presence => {
+            const { nik, month, gender, position_name, present, sick, absent } = presence;
+            const employee_name = employeeNames.find(name => name === presence.employee_name) || "-";
+            const employee_nik = employeeNIKs.find(n => n === presence.nik) || "-";
+
+            presenceMap.set(employee_nik, {
+                employee_name,
+                month,
+                gender,
+                position_name,
+                present,
+                sick,
+                absent
+            });
         });
 
-        const resultDataKehadiran = [];
-        dataKehadiranMap.forEach(({ nik, bulan, jenis_kelamin, nama_jabatan, hadir, sakit, alpha }, nikPegawai) => {
-            const nama_pegawai = data_nama_pegawai.find(nama => nama === dataKehadiranMap.get(nikPegawai).nama_pegawai) || "-";
-            resultDataKehadiran.push({ nama_pegawai, nik, bulan, jenis_kelamin, nama_jabatan, hadir, sakit, alpha });
+        const result = [];
+        presenceMap.forEach(({ month, gender, position_name, present, sick, absent, employee_name }, nik) => {
+            result.push({
+                employee_name,
+                nik,
+                month,
+                gender,
+                position_name,
+                present,
+                sick,
+                absent
+            });
         });
 
-        console.log(resultDataKehadiran);
-
+        console.log(result);
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 }
 
-getDataKehadiran();
+getPresenceData();
 
-/* Method untuk mengambil Data Jabatan */
+/* Method to fetch Position Data */
 
-async function getDataJabatan() {
-    const dataJabatan = await DataJabatan.find();
-    const datajabatanMap = new Map();
+async function getPositionData() {
     try {
-        dataJabatan.forEach(jabatan => {
-            const {nama_jabatan, gaji_pokok, tj_transport, uang_makan} = jabatan;
-            datajabatanMap.set(nama_jabatan, {gaji_pokok, tj_transport, uang_makan});
+        const positions = await PositionModel.find();
+        const positionMap = new Map();
+
+        positions.forEach(pos => {
+            const { position_name, base_salary, transport_allowance, meal_allowance } = pos;
+            positionMap.set(position_name, { base_salary, transport_allowance, meal_allowance });
         });
 
-        const resultDatajabatan = [];
-        datajabatanMap.forEach(({gaji_pokok, tj_transport, uang_makan}, nama_jabatan) => {
-            resultDatajabatan.push({nama_jabatan, gaji_pokok, tj_transport, uang_makan});
+        const result = [];
+        positionMap.forEach(({ base_salary, transport_allowance, meal_allowance }, position_name) => {
+            result.push({ position_name, base_salary, transport_allowance, meal_allowance });
         });
 
-        return resultDatajabatan;
+        return result;
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 }

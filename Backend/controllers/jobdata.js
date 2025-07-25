@@ -1,91 +1,108 @@
-import DataJabatan from "../models/positionmodel.js";
-import DataPegawai from "../models/employeemodel.js";
+import mongoose from 'mongoose';
+import Position from "../models/positionmodel.js";
+import Employee from "../models/employeemodel.js";
 
-// menampilkan semua data jabatan
-export const getDataJabatan = async (req, res) => {
-    try {
-        let response;
-        if (req.hak_akses === "admin") {
-            response = await DataJabatan.find().select('id_jabatan nama_jabatan gaji_pokok tj_transport uang_makan userId');
-        } else {
-            return res.status(403).json({ msg: "Akses terlarang" });
-        }
-        res.status(200).json(response);
-    } catch (error) {
-        res.status(500).json({ msg: error.message });
+// Display all position data
+export const getAllPositions = async (req, res) => {
+  try {
+    let response;
+    if (req.role === "admin") {
+      response = await Position.find().select(
+        "position_id position_name base_salary transport_allowance meal_allowance user_id"
+      );
+    } else {
+      return res.status(403).json({ msg: "Access denied" });
     }
-}
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
 
-// method untuk menampilkan data jabatan by ID
-export const getDataJabatanByID = async (req, res) => {
-    try {
-        const response = await DataJabatan.findById(req.params.id).select('id_jabatan nama_jabatan gaji_pokok tj_transport uang_makan userId');
-        if(response){
-            res.status(200).json(response);
-        }else{
-            res.status(404).json({msg: 'Data jabatan dengan ID tersebut tidak ditemukan'});
-        }
-    } catch (error) {
-        res.status(500).json({msg: error.message});
+// Get position data by ID
+export const getPositionById = async (req, res) => {
+  try {
+    const response = await Position.findById(req.params.id).select(
+      "position_id position_name base_salary transport_allowance meal_allowance user_id"
+    );
+    if (response) {
+      res.status(200).json(response);
+    } else {
+      res.status(404).json({ msg: "Position data with that ID not found" });
     }
-}
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
 
-// method untuk tambah data jabatan
-export const createDataJabatan = async (req, res) => {
-    const {
-        id_jabatan, nama_jabatan, gaji_pokok, tj_transport, uang_makan
-    } = req.body;
-    try {
-        if (req.hak_akses === "admin") {
-            await DataJabatan.create({
-                id_jabatan: id_jabatan,
-                nama_jabatan: nama_jabatan,
-                gaji_pokok: gaji_pokok,
-                tj_transport: tj_transport,
-                uang_makan: uang_makan,
-                userId: req.userId
-            });
-        } else {
-            return res.status(403).json({ msg: "Akses terlarang" });
-        }
-        res.status(201).json({ success: true, message: "Data Jabatan Berhasil di Simpan" });
-    } catch (error) {
-        console.log(error.message);
-        res.status(500).json({ success: false, message: error.message });
-    }
-}
+// Create new position
+export const createPosition = async (req, res) => {
+  const {
+    position_name,
+    base_salary,
+    transport_allowance,
+    meal_allowance
+  } = req.body;
 
-// method untuk update data jabatan
-export const updateDataJabatan = async (req, res) => {
-    try {
-        const jabatan = await DataJabatan.findById(req.params.id);
-        if (!jabatan) return res.status(404).json({ msg: "Data tidak ditemukan" });
-        const { nama_jabatan, gaji_pokok, tj_transport, uang_makan } = req.body;
-        if (req.hak_akses === "admin") {
-            await DataJabatan.findByIdAndUpdate(jabatan._id, {
-                nama_jabatan, gaji_pokok, tj_transport, uang_makan
-            });
-        } else {
-            return res.status(403).json({ msg: "Akses terlarang" });
-        }
-        res.status(200).json({ msg: "Data Jabatan Berhasil di Pebarui" });
-    } catch (error) {
-        res.status(500).json({ msg: error.message });
+  try {
+    if (req.role === "admin") {
+      await Position.create({
+        position_id: new mongoose.Types.ObjectId().toString(),
+        position_name,
+        base_salary: Number(base_salary),
+        transport_allowance: Number(transport_allowance),
+        meal_allowance: meal_allowance ? Number(meal_allowance) : 0,
+        user_id: req.userId
+      });
+    } else {
+      return res.status(403).json({ msg: "Access denied" });
     }
-}
+    res.status(201).json({ success: true, message: "Position saved successfully" });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
 
-// method untuk delete data jabatan
-export const deleteDataJabatan = async (req, res) => {
-    try {
-        const jabatan = await DataJabatan.findById(req.params.id);
-        if (!jabatan) return res.status(404).json({ msg: "Data tidak ditemukan" });
-        if (req.hak_akses === "admin") {
-            await DataJabatan.findByIdAndDelete(jabatan._id);
-        } else {
-            return res.status(403).json({ msg: "Akses terlarang" });
-        }
-        res.status(200).json({ msg: "Data Jabatan Berhasil di Hapus" });
-    } catch (error) {
-        res.status(500).json({ msg: error.message });
+// Update position data
+export const updatePosition = async (req, res) => {
+  try {
+    const position = await Position.findById(req.params.id);
+    if (!position) return res.status(404).json({ msg: "Data not found" });
+
+    const { position_name, base_salary, transport_allowance, meal_allowance } = req.body;
+
+    if (req.role === "admin") {
+      await Position.findByIdAndUpdate(position._id, {
+        position_name,
+        base_salary: Number(base_salary),
+        transport_allowance: Number(transport_allowance),
+        meal_allowance: meal_allowance ? Number(meal_allowance) : 0
+      });
+    } else {
+      return res.status(403).json({ msg: "Access denied" });
     }
-}
+
+    res.status(200).json({ msg: "Position updated successfully" });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+
+// Delete position data
+export const deletePosition = async (req, res) => {
+  try {
+    const position = await Position.findById(req.params.id);
+    if (!position) return res.status(404).json({ msg: "Data not found" });
+
+    if (req.role === "admin") {
+      await Position.findByIdAndDelete(position._id);
+    } else {
+      return res.status(403).json({ msg: "Access denied" });
+    }
+
+    res.status(200).json({ msg: "Position deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};

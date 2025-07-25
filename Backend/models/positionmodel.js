@@ -1,31 +1,31 @@
 import mongoose from 'mongoose';
 
-const DataJabatanSchema = new mongoose.Schema({
-    id_jabatan: {
-        type: String,
-        default: () => new mongoose.Types.ObjectId().toString(),
-        required: true
-    },
-    nama_jabatan: {
-        type: String,
-        required: true,
-        maxlength: 120
-    },
-    gaji_pokok: {
-        type: Number,
-        required: true
-    },
-    tj_transport: {
-        type: Number,
-        required: true
-    },
-    uang_makan: {
-        type: Number
-    },
-    userId: {
-        type: String,
-        required: true
-    }
-}, { collection: 'data_jabatan' });
+export const PositionSchema = new mongoose.Schema({
+  position_id: {
+    type: String,
+    default: () => new mongoose.Types.ObjectId().toString(),
+    required: true
+  },
+  position_name: {
+    type: String,
+    required: true,
+    maxlength: 120
+  },
+  base_salary: {
+    type: Number,
+    required: true
+  },
+  transport_allowance: {
+    type: Number,
+    required: true
+  },
+  meal_allowance: {
+    type: Number
+  },
+  user_id: {
+    type: String,
+    required: true
+  }
+}, { collection: 'positions' });
 
-export default mongoose.model('DataJabatan', DataJabatanSchema);
+export default mongoose.model('Position', PositionSchema);

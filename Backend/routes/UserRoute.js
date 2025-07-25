@@ -1,139 +1,136 @@
 import express from 'express';
 
-/* === import Middleware === */
+/* === Middleware === */
 import { adminOnly, verifyUser } from '../middleware/AuthUser.js';
 
-/* === import Controllers === */
+/* === Employee Controllers === */
 import {
-    getDataPegawai,
-    getDataPegawaiByID,
-    createDataPegawai,
-    updateDataPegawai,
-    deleteDataPegawai,
-    getDataPegawaiByNik,
-    getDataPegawaiByName,
+    getAllEmployees,
+    getEmployeeByID,
+    createEmployee,
+    updateEmployee,
+    deleteEmployee,
+    getEmployeeByNationalID,
+    getEmployeeByName,
 } from '../controllers/employeedata.js';
 
+/* === Position Controllers === */
 import {
-    getDataJabatan,
-    createDataJabatan,
-    updateDataJabatan,
-    deleteDataJabatan,
-    getDataJabatanByID
+    getAllPositions,
+    getPositionById,
+    createPosition,
+    updatePosition,
+    deletePosition,
 } from "../controllers/jobdata.js";
 
+/* === Attendance and Salary Controllers === */
 import {
-    viewDataKehadiran,
-    createDataKehadiran,
-    updateDataKehadiran,
-    deleteDataKehadiran,
-    viewDataKehadiranByID,
-    viewDataGajiByName,
+    viewAttendanceData,
+    createAttendanceData,
+    updateAttendanceData,
+    deleteAttendanceData,
+    viewAttendanceDataById,
+    viewSalaryByName,
+    viewEmployeeSalaries,
+    viewSalaryByMonth,
+    viewSalaryByYear
 } from "../controllers/transactioncontroller.js";
 
+/* === Salary Deduction Controllers === */
 import {
-    createDataPotonganGaji,
-    deleteDataPotongan,
-    viewDataPotonganByID,
-    updateDataPotongan,
-    viewDataPotongan
+    createSalaryDeductionData,
+    deleteSalaryDeduction,
+    viewSalaryDeductionById,
+    updateSalaryDeduction,
+    viewSalaryDeductions
 } from "../controllers/transactioncontroller.js";
 
+/* === Reports Controllers === */
 import {
-    viewDataGajiPegawai,
-    viewDataGajiPegawaiByMonth,
-    viewDataGajiPegawaiByYear
-} from "../controllers/transactioncontroller.js";
-
-import {
-    viewLaporanAbsensiPegawaiByMonth,
-    viewLaporanAbsensiPegawaiByYear,
-    viewLaporanGajiPegawai,
-    viewLaporanGajiPegawaiByMonth,
-    viewLaporanGajiPegawaiByName,
-    viewLaporanGajiPegawaiByYear,
-    viewSlipGajiByMonth,
-    viewSlipGajiByName,
-    viewSlipGajiByYear,
+    viewEmployeeAttendanceByMonth,
+    viewEmployeeAttendanceByYear,
+    viewEmployeeSalaryReport,
+    viewEmployeeSalaryReportByMonth,
+    viewEmployeeSalaryReportByName,
+    viewEmployeeSalaryReportByYear,
+    viewSalarySlipByMonth,
+    viewSalarySlipByName,
+    viewSalarySlipByYear,
 } from "../controllers/reportcontroller.js";
 
-import { LogOut, changePassword } from '../controllers/Auth.js';
+/* === Auth & Dashboard Controllers === */
+import { logout, changePassword } from '../controllers/Auth.js';
 import {
-    dashboardPegawai,
-    viewDataGajiSinglePegawaiByMonth,
-    viewDataGajiSinglePegawaiByYear
+    employeeDashboard,
+    viewEmployeeSalaryByMonth,
+    viewEmployeeSalaryByYear
 } from '../controllers/employee.js';
 
 const router = express.Router();
 
-// Admin Route :
-
 /* ==== Master Data ==== */
-// Data Pegawai
-router.get('/data_pegawai', verifyUser, adminOnly, getDataPegawai);
-router.get('/data_pegawai/id/:id', verifyUser, adminOnly, getDataPegawaiByID);
-router.get('/data_pegawai/nik/:nik', verifyUser, adminOnly, getDataPegawaiByNik);
-router.get('/data_pegawai/name/:name', verifyUser, getDataPegawaiByName);
-router.post('/data_pegawai',verifyUser, adminOnly, createDataPegawai);
-router.patch('/data_pegawai/:id', verifyUser, adminOnly, updateDataPegawai);
-router.delete('/data_pegawai/:id', verifyUser, adminOnly, deleteDataPegawai);
-router.patch('/data_pegawai/:id/change_password', verifyUser, adminOnly, changePassword);
-// Data Jabatan
-router.get('/data_jabatan', verifyUser, adminOnly, getDataJabatan);
-router.get('/data_jabatan/:id', verifyUser, adminOnly, getDataJabatanByID);
-router.post('/data_jabatan', verifyUser, adminOnly, createDataJabatan);
-router.patch('/data_jabatan/:id', verifyUser, adminOnly, updateDataJabatan);
-router.delete('/data_jabatan/:id', verifyUser, adminOnly, deleteDataJabatan);
+// Employee Routes
+router.get('/employees', verifyUser, adminOnly, getAllEmployees);
+router.get('/employees/id/:id', verifyUser, adminOnly, getEmployeeByID);
+router.get('/employees/nik/:nik', verifyUser, adminOnly, getEmployeeByNationalID);
+router.get('/employees/name/:name', verifyUser, getEmployeeByName);
+router.post('/employees', verifyUser, adminOnly, createEmployee);
+router.patch('/employees/:id', verifyUser, adminOnly, updateEmployee);
+router.delete('/employees/:id', verifyUser, adminOnly, deleteEmployee);
+router.patch('/employees/:id/change_password', verifyUser, adminOnly, changePassword);
 
-/* ==== Transaksi  ==== */
-// Data Kehadiran
-router.get('/data_kehadiran', verifyUser, adminOnly, viewDataKehadiran);
-router.get('/data_kehadiran/:id', verifyUser, adminOnly, viewDataKehadiranByID);
-router.post('/data_kehadiran',verifyUser, adminOnly, createDataKehadiran);
-router.patch('/data_kehadiran/update/:id',verifyUser, adminOnly, updateDataKehadiran);
-router.delete('/data_kehadiran/:id', verifyUser, adminOnly, deleteDataKehadiran);
-// Data Potongan
-router.get('/data_potongan', adminOnly, verifyUser, viewDataPotongan);
-router.get('/data_potongan/:id', adminOnly, verifyUser, viewDataPotonganByID);
-router.post('/data_potongan', adminOnly, verifyUser, createDataPotonganGaji);
-router.patch('/data_potongan/update/:id', adminOnly, verifyUser, updateDataPotongan);
-router.delete('/data_potongan/:id', adminOnly, verifyUser, deleteDataPotongan);
-// Data Gaji
-router.get('/data_gaji_pegawai', viewDataGajiPegawai);
-router.get('/data_gaji/name/:name', verifyUser, viewDataGajiByName);
-router.get('/data_gaji_pegawai/month/:month', viewDataGajiPegawaiByMonth);
-router.get('/data_gaji_pegawai/year/:year', viewDataGajiPegawaiByYear);
+// Position Routes
+router.get('/positions', verifyUser, adminOnly, getAllPositions);
+router.get('/positions/:id', verifyUser, adminOnly, getPositionById);
+router.post('/positions', verifyUser, adminOnly, createPosition);
+router.patch('/positions/:id', verifyUser, adminOnly, updatePosition);
+router.delete('/positions/:id', verifyUser, adminOnly, deletePosition);
 
-/* ====  Laporan  ==== */
-// laporan Gaji Pegawai
-router.get('/laporan/gaji',verifyUser, adminOnly, viewLaporanGajiPegawai);
-router.get('/laporan/gaji/name/:name',verifyUser, adminOnly, viewLaporanGajiPegawaiByName);
-router.get('/laporan/gaji/month/:month', verifyUser, adminOnly,viewLaporanGajiPegawaiByMonth);
-router.get('/laporan/gaji/year/:year', verifyUser, adminOnly,viewLaporanGajiPegawaiByYear);
-// Laporan Absensi Pegawai
-router.get('/laporan/absensi/month/:month', verifyUser, adminOnly,viewLaporanAbsensiPegawaiByMonth);
-router.get('/laporan/absensi/year/:year', verifyUser, adminOnly,viewLaporanAbsensiPegawaiByYear);
-// Slip Gaji Pegawai
-router.get('/laporan/slip_gaji/name/:name', verifyUser, adminOnly,viewSlipGajiByName);
-router.get('/laporan/slip_gaji/month/:month',verifyUser, adminOnly, viewSlipGajiByMonth);
-router.get('/laporan/slip_gaji/year/:year',verifyUser, adminOnly, viewSlipGajiByYear);
+/* ==== Attendance Routes ==== */
+router.get('/attendance', verifyUser, adminOnly, viewAttendanceData);
+router.get('/attendance/:id', verifyUser, adminOnly, viewAttendanceDataById);
+router.post('/attendance', verifyUser, createAttendanceData);
+router.patch('/attendance/update/:id', verifyUser, adminOnly, updateAttendanceData);
+router.delete('/attendance/:id', verifyUser, adminOnly, deleteAttendanceData);
 
-/* ==== Ubah Password ==== */
+/* ==== Deductions ==== */
+router.get('/deductions', verifyUser, adminOnly, viewSalaryDeductions);
+router.get('/deductions/:id', verifyUser, adminOnly, viewSalaryDeductionById);
+router.post('/deductions', verifyUser, adminOnly, createSalaryDeductionData);
+router.patch('/deductions/update/:id', verifyUser, adminOnly, updateSalaryDeduction);
+router.delete('/deductions/:id', verifyUser, adminOnly, deleteSalaryDeduction);
+
+/* ==== Salary Data ==== */
+router.get('/salaries', viewEmployeeSalaries);
+router.get('/salaries/name/:name', verifyUser, viewSalaryByName);
+router.get('/salaries/month/:month', viewSalaryByMonth);
+router.get('/salaries/year/:year', viewSalaryByYear);
+
+/* ==== Reports ==== */
+// Salary Reports
+router.get('/reports/salary', verifyUser, adminOnly, viewEmployeeSalaryReport);
+router.get('/reports/salary/name/:name', verifyUser, adminOnly, viewEmployeeSalaryReportByName);
+router.get('/reports/salary/month/:month', verifyUser, adminOnly, viewEmployeeSalaryReportByMonth);
+router.get('/reports/salary/year/:year', verifyUser, adminOnly, viewEmployeeSalaryReportByYear);
+
+// Attendance Reports
+router.get('/reports/attendance/month/:month', verifyUser, adminOnly, viewEmployeeAttendanceByMonth);
+router.get('/reports/attendance/year/:year', verifyUser, adminOnly, viewEmployeeAttendanceByYear);
+
+// Salary Slip
+router.get('/salary-slip/name/:name', verifyUser, adminOnly, viewSalarySlipByName);
+router.get('/salary-slip/month/:month', verifyUser, adminOnly, viewSalarySlipByMonth);
+router.get('/salary-slip/year/:year', verifyUser, adminOnly, viewSalarySlipByYear);
+
+/* ==== Authentication ==== */
 router.patch('/change_password', verifyUser, changePassword);
+router.delete('/logout', logout);
 
-/* ==== Logout ==== */
-router.delete('/logout', LogOut);
-
-// Pegawai Route :
-/* ==== Dashboard ==== */
-router.get('/dashboard', verifyUser, dashboardPegawai);
-/* ==== Data Gaji ==== */
-router.get('/data_gaji/month/:month', verifyUser, viewDataGajiSinglePegawaiByMonth);
-router.get('/data_gaji/year/:year', verifyUser, viewDataGajiSinglePegawaiByYear);
-/* ==== Ubah Password ==== */
+/* ==== Employee (Self-Service) ==== */
+router.get('/dashboard', verifyUser, employeeDashboard);
+router.get('/salary/month/:month', verifyUser, viewEmployeeSalaryByMonth);
+router.get('/salary/year/:year', verifyUser, viewEmployeeSalaryByYear);
 router.patch('/change_password', verifyUser, changePassword);
-/* ==== Logout ==== */
-router.delete('/logout', LogOut);
-
+router.delete('/logout', logout);
 
 export default router;

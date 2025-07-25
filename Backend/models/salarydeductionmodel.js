@@ -1,20 +1,20 @@
 import mongoose from 'mongoose';
 
-const PotonganGajiSchema = new mongoose.Schema({
-    id: {
-        type: Number,
-        required: true,
-        unique: true
-    },
-    potongan: {
-        type: String,
-        required: true,
-        maxlength: 120
-    },
-    jml_potongan: {
-        type: Number,
-        required: true
-    }
-}, { collection: 'potongan_gaji' });
+export const SalaryDeductionSchema = new mongoose.Schema({
+  deduction_id: {
+    type: Number,
+    required: true,
+    unique: true
+  },
+  deduction_type: {
+    type: String,
+    required: true,
+    maxlength: 120
+  },
+  deduction_amount: {
+    type: Number,
+    required: true
+  }
+}, { collection: 'salary_deductions' });
 
-export default mongoose.model('PotonganGaji', PotonganGajiSchema);
+export default mongoose.model('SalaryDeduction', SalaryDeductionSchema);
