@@ -34,17 +34,20 @@ app.use(session({
         collectionName: 'sessions'
     }),
     cookie: {
-        secure: 'auto'
+        sameSite: 'none', // must be 'none' for cross-origin cookies
+        secure: true      // must be true when using HTTPS (Render uses HTTPS)
     }
+
 }));
 
-app.use(cors ({
+app.use(cors({
+    origin: ['https://sparkly-mooncake-4f628e.netlify.app', 'http://localhost:5173'],
     credentials: true,
-    origin: [
-        'http://localhost:5173',
-        'https://sparkly-mooncake-4f628e.netlify.app'
-    ]
-}));
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type'],
+    exposedHeaders: ['Set-Cookie']
+  }));
+  
 
 app.use(express.json());
 app.use(FileUpload());
