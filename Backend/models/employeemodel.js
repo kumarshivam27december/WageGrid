@@ -54,6 +54,10 @@ export const EmployeeSchema = new mongoose.Schema({
     type: String,
     required: true
   }
-}, { collection: 'employees' });
+}, { 
+  collection: 'employees',
+  timestamps: true
+});
 
-export default mongoose.model('Employee', EmployeeSchema);
+const Employee = mongoose.model('Employee', EmployeeSchema);
+export default Employee;

@@ -18,10 +18,12 @@ mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
+
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open', () => {
-    console.log('Connected to MongoDB');
+    console.log('Connected to MongoDB Atlas');
+    console.log('Database name:', db.name);
 });
 
 // Middleware
@@ -53,6 +55,15 @@ app.use(express.static("public"));
 // Mount routes under /api prefix
 app.use('/api', UserRoute);
 app.use('/api', AuthRoute);
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+    res.status(200).json({ 
+        status: 'OK', 
+        database: db.readyState === 1 ? 'Connected' : 'Disconnected',
+        timestamp: new Date().toISOString()
+    });
+});
 
 app.listen(process.env.APP_PORT, () => {
     console.log('Server up and running... at port ' + process.env.APP_PORT);

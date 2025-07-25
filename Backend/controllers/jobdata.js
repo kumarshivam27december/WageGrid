@@ -4,17 +4,26 @@ import Employee from "../models/employeemodel.js";
 
 // Display all position data
 export const getAllPositions = async (req, res) => {
+  console.log('getAllPositions called');
+  console.log('User role:', req.role);
+  console.log('Database connection state:', mongoose.connection.readyState);
+  
   try {
     let response;
     if (req.role === "admin") {
-      response = await Position.find().select(
+      console.log('Querying Position.find()...');
+      response = await Position.find({}).select(
         "position_id position_name base_salary transport_allowance meal_allowance user_id"
       );
+      console.log('Position.find() returned:', response.length, 'positions');
+      console.log('Sample position data:', response.length > 0 ? response[0] : 'No positions found');
     } else {
+      console.log('Access denied - user role is not admin:', req.role);
       return res.status(403).json({ msg: "Access denied" });
     }
     res.status(200).json(response);
   } catch (error) {
+    console.error('getAllPositions error:', error);
     res.status(500).json({ msg: error.message });
   }
 };
