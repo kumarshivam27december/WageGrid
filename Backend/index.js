@@ -42,7 +42,7 @@ app.use(cors ({
     credentials: true,
     origin: [
         'http://localhost:5173',
-        'https://strong-moxie-3872e5.netlify.app'
+        'https://sparkly-mooncake-4f628e.netlify.app/'
     ]
 }));
 
