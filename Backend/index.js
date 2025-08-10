@@ -8,6 +8,7 @@ import FileUpload from 'express-fileupload';
 
 import UserRoute from './routes/UserRoute.js';
 import AuthRoute from './routes/AuthRoute.js';
+import PositionRoute from './routes/PositionRoute.js';
 
 dotenv.config();
 
@@ -31,7 +32,7 @@ app.use(cors({
   credentials: true
 }));
 
-  
+app.set('trust proxy', 1); // Trust first proxy
 
 app.use(express.json());
 app.use(FileUpload());
@@ -58,6 +59,7 @@ app.use(session({
 // Mount routes under /api prefix
 app.use('/api', UserRoute);
 app.use('/api', AuthRoute);
+app.use('/api/positions', PositionRoute);
 
 app.listen(process.env.APP_PORT, () => {
     console.log('Server up and running... at port ' + process.env.APP_PORT);
