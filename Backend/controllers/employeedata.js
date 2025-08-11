@@ -71,71 +71,78 @@ export const getEmployeeByName = async (req, res) => {
 
 // Create new employee
 export const createEmployee = async (req, res) => {
-  console.log('createEmployee called, body:', req.body, 'files:', req.files);
-  const {
-    national_id,
-    employee_name,
-    username,
-    password,
-    confirmPassword,
-    gender,
-    position,
-    date_joined,
-    employment_status,
-    role
-  } = req.body;
+  try {
+    // Log all incoming request data for debugging
+    console.log('createEmployee called, body:', req.body, 'files:', req.files);
+    const {
+      national_id,
+      employee_name,
+      username,
+      password,
+      confirmPassword,
+      gender,
+      position,
+      date_joined,
+      employment_status,
+      role
+    } = req.body;
 
-  if (password !== confirmPassword) {
-    return res.status(400).json({ msg: "Password and confirmation password do not match" });
-  }
-
-  if (!req.files || !req.files.photo) {
-    return res.status(400).json({ msg: "Photo upload failed. Please try uploading again" });
-  }
-
-  const file = req.files.photo;
-  const fileSize = file.data.length;
-  const ext = path.extname(file.name);
-  const fileName = file.md5 + ext;
-  const url = `${req.protocol}://${req.get("host")}/images/${fileName}`;
-  const allowedTypes = ['.png', '.jpg', '.jpeg'];
-
-  if (!allowedTypes.includes(ext.toLowerCase())) {
-    return res.status(422).json({ msg: "Invalid photo file format" });
-  }
-
-  if (fileSize > 2000000) {
-    return res.status(422).json({ msg: "Image size must be less than 2 MB" });
-  }
-
-  file.mv(`./public/images/${fileName}`, async (err) => {
-    if (err) {
-      return res.status(500).json({ msg: err.message });
+    if (password !== confirmPassword) {
+      return res.status(400).json({ msg: "Password and confirmation password do not match" });
     }
 
-    const hashedPassword = await argon2.hash(password);
-
-    try {
-      await Employee.create({
-        national_id: national_id,
-        employee_name: employee_name,
-        username: username,
-        password: hashedPassword,
-        gender: gender,
-        position: position,
-        date_joined: date_joined,
-        employment_status: employment_status,
-        photo: fileName,
-        url: url,
-        role: role
-      });
-
-      res.status(201).json({ success: true, message: "Registration successful" });
-    } catch (error) {
-      console.log(error.message);
-      res.status(500).json({ success: false, message: error.message });
+    if (!req.files || !req.files.photo) {
+      console.error('Photo upload failed. req.files:', req.files);
+      return res.status(400).json({ msg: "Photo upload failed. Please try uploading again" });
     }
-  });
+
+    const file = req.files.photo;
+    const fileSize = file.data.length;
+    const ext = path.extname(file.name);
+    const fileName = file.md5 + ext;
+    const url = `${req.protocol}://${req.get("host")}/images/${fileName}`;
+    const allowedTypes = ['.png', '.jpg', '.jpeg'];
+
+    if (!allowedTypes.includes(ext.toLowerCase())) {
+      return res.status(422).json({ msg: "Invalid photo file format" });
+    }
+
+    if (fileSize > 2000000) {
+      return res.status(422).json({ msg: "Image size must be less than 2 MB" });
+    }
+
+    file.mv(`./public/images/${fileName}`, async (err) => {
+      if (err) {
+        console.error('Error moving uploaded file:', err);
+        return res.status(500).json({ msg: err.message });
+      }
+      try {
+        const hashedPassword = await argon2.hash(password);
+
+        await Employee.create({
+          national_id: national_id,
+          employee_name: employee_name,
+          username: username,
+          password: hashedPassword,
+          gender: gender,
+          position: position,
+          date_joined: date_joined,
+          employment_status: employment_status,
+          photo: fileName,
+          url: url,
+          role: role
+        });
+
+        res.status(201).json({ success: true, message: "Registration successful" });
+      } catch (dbError) {
+        console.error('Error creating employee in DB:', dbError);
+        return res.status(500).json({ msg: dbError.message });
+      }
+    });
+  } catch (error) {
+    console.error('Error in createEmployee:', error);
+    res.status(500).json({ msg: error.message });
+  }
 };
 
 // Update employee data

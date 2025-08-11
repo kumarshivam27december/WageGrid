@@ -5,7 +5,6 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import MongoStore from 'connect-mongo';
 import FileUpload from 'express-fileupload';
-
 import UserRoute from './routes/UserRoute.js';
 import AuthRoute from './routes/AuthRoute.js';
 import PositionRoute from './routes/PositionRoute.js';
@@ -48,11 +47,10 @@ app.use(session({
         collectionName: 'sessions'
     }),
     cookie: {
-          httpOnly: true,
+        httpOnly: true,
         sameSite: 'none', // must be 'none' for cross-origin cookies
         secure: true      // must be true when using HTTPS (Render uses HTTPS)
     }
-
 }));
 
 
