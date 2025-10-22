@@ -1,16 +1,21 @@
 import Employee from "../models/employeemodel.js";
 import argon2 from "argon2";
 import path from "path";
+import mongoose from "mongoose";
 
 // Display all employee data
 export const getAllEmployees = async (req, res) => {
   console.log('getAllEmployees called');
+  console.log('Database connection state:', mongoose.connection.readyState);
+  console.log('Database name:', mongoose.connection.name);
+  
   try {
     console.log('Querying Employee.find()...');
-    const response = await Employee.find().select(
+    const response = await Employee.find({}).select(
       'employee_id national_id employee_name gender position date_joined employment_status photo role'
     );
     console.log('Employee.find() returned:', response.length, 'employees');
+    console.log('Sample employee data:', response.length > 0 ? response[0] : 'No employees found');
     res.status(200).json(response);
   } catch (error) {
     console.error('getAllEmployees error:', error);
